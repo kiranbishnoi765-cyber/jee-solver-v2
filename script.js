@@ -81,3 +81,9 @@ sendBtn.addEventListener('click', async function() {
 
   chatBox.scrollTop = chatBox.scrollHeight;
 });
+questionInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendBtn.click();
+  }
+});
