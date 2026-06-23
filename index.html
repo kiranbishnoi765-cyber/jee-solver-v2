@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Markdown renderer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Math renderer -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JEE Solver Agent</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>JEE Solver Agent ⚡</h1>
+    <select id="subject-select">
+      <option value="Physics">Physics</option>
+      <option value="Chemistry">Chemistry</option>
+      <option value="Mathematics">Mathematics</option>
+    </select>
+  </header>
+
+  <!-- CHAT AREA -->
+  <main class="chat-box" id="chat-box">
+    <!-- messages yahan aayenge JS se -->
+  </main>
+
+  <!-- INPUT AREA -->
+  <footer class="input-area">
+    <textarea id="question-input" placeholder="Apna question yahan likho..."></textarea>
+    <button id="send-btn">Send</button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
