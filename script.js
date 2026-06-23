@@ -22,15 +22,15 @@ sendBtn.addEventListener('click', async function() {
   thinkingMsg.textContent = 'Thinking...';
   chatBox.appendChild(thinkingMsg);
 
-  // Backend ko request bhejo
-  const formData = new FormData();
-  formData.append('subject', subject);
-  formData.append('student_query', question);
 
-  try {
+try {
     const response = await fetch('https://jee-solver-agent.onrender.com/api/ask', {
       method: 'POST',
-      body: formData
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        student_query: question,
+        subject: subject
+      })
     });
 
     const data = await response.json();
