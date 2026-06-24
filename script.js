@@ -1,6 +1,31 @@
 const sendBtn = document.getElementById('send-btn');
 const questionInput = document.getElementById('question-input');
 const chatBox = document.getElementById('chat-box');
+const tinaImg = document.getElementById('tina-img');
+// Route guard — login check
+const token = localStorage.getItem('token');
+const userName = localStorage.getItem('name');
+
+if (!token) {
+  window.location.href = 'login.html';
+}
+// User greeting
+document.getElementById('user-greeting').textContent = `Hi, ${userName}! 👋`;
+
+// Logout
+document.getElementById('logout-btn').addEventListener('click', function() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('name');
+  window.location.href = 'login.html';
+});
+
+function setTinaMood(mood) {
+  tinaImg.style.opacity = '0';
+  setTimeout(() => {
+    tinaImg.src = `images/tina-${mood}.png`;
+    tinaImg.style.opacity = '1';
+  }, 300);
+}
 
 sendBtn.addEventListener('click', async function() {
   const question = questionInput.value.trim();
@@ -21,6 +46,7 @@ sendBtn.addEventListener('click', async function() {
   thinkingMsg.className = 'message ai-message';
   thinkingMsg.textContent = 'Thinking...';
   chatBox.appendChild(thinkingMsg);
+  setTinaMood('thinking');
 
 
 try {
@@ -37,6 +63,7 @@ try {
 
     // "Thinking..." replace karo real answer se
     thinkingMsg.innerHTML = marked.parse(data.answer);
+    setTinaMood('normal');
     renderMathInElement(thinkingMsg, {
         delimiters: [
             { left: '$$', right: '$$', display: true },
@@ -61,6 +88,7 @@ try {
     // Buttons disable karo — ek baar hi click ho
     feedbackDiv.querySelectorAll('.fb-btn').forEach(b => b.disabled = true);
     feedbackDiv.querySelector('span').textContent = status === 'Correct' ? '✅ Thanks!' : '❌ Got it!';
+    setTinaMood(status === 'Correct' ? 'happy' : 'sad');
 
     // Backend ko bhejo
     await fetch('https://jee-solver-agent.onrender.com/api/feedback', {
